@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function SearchBar({searchField, searchChange}) {
- 
     return (
         <form>
             <div className="form-group">
                 <label> Employee Search: 
-                    <input className="form-control" type="text" name="search" value={this.state.value} onChange={searchChange} />
+                    <input 
+                    className="form-control" 
+                    type="search" 
+                    name="search" 
+                    onChange={searchChange} 
+                    />
                 </label>
             </div>
         </form>
