@@ -9,14 +9,15 @@ class App extends Component {
     super()
     this.state = {
       employees: [],
-      searchField: ''
+      searchField: '',
+      direction: 'desc'
     }
 
     this.sortData = this.sortData.bind(this)
   }
 
   componentDidMount() {
-    fetch('https://randomuser.me/api/?results=200&nat=us', {mode: 'cors'})
+    fetch('https://randomuser.me/api/?results=20&nat=us', {mode: 'cors'})
     .then(res => res.json())
     .then(empls => {
       this.setState({employees: empls.results})
@@ -27,40 +28,53 @@ class App extends Component {
     this.setState({ searchField: event.target.value })
   }
 
-  sortData(keyOne, keyTwo) {
+  sortData(keyOne) {
     let data = [...this.state.employees]; 
     let sorted = [];
+    let newDirection;
+    let currentDirection = this.state.direction;
     
-    // only name and dob have second "keys"
-    if (keyOne === 'name' || keyOne === "dob") {
+    
+    
       sorted = data.sort((a, b) => {
-        if (a.[keyOne][keyTwo] > b.[keyOne][keyTwo] ) {
+        // only name and dob have second "keys"
+        if (keyOne === 'name' || keyOne === "dob") {
+          let fullNameA = a.name.first + ' ' + a.name.last;
+          let fullNameB = b.name.first + ' ' + b.name.last;
+
+        if (fullNameA > fullNameB && currentDirection === 'desc' ) {
+          newDirection = 'asc';
           return 1;
-        } else if (a.[keyOne][keyTwo] < b.[keyOne][keyTwo]) {
-          return -1;
+        } else if (fullNameA < fullNameB && currentDirection === 'asc') {
+          console.log("i've descended");
+          newDirection = 'desc';
+           return -1;
         } else {
-          return 0;
+          newDirection = currentDirection === 'desc' ? 'asc' : 'desc'
+          return -1;
         }
         
-      });
-    } else {
-      // phone and email 
-      sorted = data.sort((a, b) => {
-        if (a.[keyOne] < b.[keyOne] ) {
-          
+      } else {
+
+        if (a[keyOne] < b[keyOne && currentDirection === 'asc' ]){
           return -1;
-        } else if (a.[keyOne] > b.[keyOne]) {
-          return 1;
+        } else if (a[keyOne] > b[keyOne] && currentDirection === 'desc' ) {
+          return +1;
         } else {
-          return 0;
+          newDirection = currentDirection === 'desc' ? 'asc' : 'desc'
+          return -1;
         }
+
         
-      });
-    }
-   
+      }
+      
+      
+    });
+    
     // After conditionals, return the sorted value
     this.setState({
-      employees: sorted
+      employees: sorted,
+      direction: newDirection
     })
   }
 
