@@ -1,4 +1,4 @@
-# React-Employee-Manager
+# React-Employee-Directory
 #### Table of Contents
   * [Description](#Description)
   * [Installation](#Installation)
