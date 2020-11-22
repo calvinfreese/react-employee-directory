@@ -7,7 +7,7 @@
   * [License](#License)
 
 ## Description
-Construcuted with React, this application pulls in employee data from an API and maps each user to a row. Employees can be filtered by typing any portion of their name, phone, email, or birth year. Sorting A-Z, Z-A, 0-9, or 9-0 can be performed on Name, Email, Phone, and DOB. Image is not a sortable item.
+Construcuted with React, this application pulls in employee data from an API and maps each user to a row. Employees can be filtered by typing any portion of their name, phone, email, or birth year. Sorting by [A-Z] or [Z-A] can be performed on Name and Email, and by [0-9] or [9-0] Phone and DOB. Image is not a sortable item.
 
 Click [Here](https://whackingmufn.github.io/react-employee-directory) to view the GitHub Pages deployment.
  
